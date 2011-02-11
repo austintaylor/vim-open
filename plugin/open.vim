@@ -15,6 +15,7 @@ endfunction
 
 function! OpenDir(path)
   execute 'lcd ' . a:path
+  let t:directory = fnamemodify(a:path, ":t")
   let l:readme = get(split(system("ls README*"), "\n"), 0)
   if filereadable(l:readme)
     execute 'edit ' . l:readme
