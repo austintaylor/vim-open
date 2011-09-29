@@ -34,6 +34,6 @@ function! OpenVimrc()
 endfunction
 
 function! ProjectComplete(prefix, line, position)
-  return system("ls " . g:project_dir)
+  return system("cd " . g:project_dir . " && find . -maxdepth 3 -type d -name '.git' | sed -e 's/^..//' -e 's/..git$//'")
 endfunction
 
