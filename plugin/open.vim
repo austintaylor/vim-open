@@ -23,7 +23,11 @@ function! OpenDir(path)
     new
   endif
   silent only
-  execute 'NERDTree ' . a:path
+  if exists('g:open_dir_callback')
+    execute g:open_dir_callback
+  else
+    execute 'NERDTree ' . a:path
+  endif
 endfunction
 
 function! OpenVimrc()
