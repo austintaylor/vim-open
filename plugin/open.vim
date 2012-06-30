@@ -5,14 +5,14 @@
 " Description: A collection of commands for opening projects.
 
 command! OpenVimrc :call OpenVimrc()
-command! -nargs=1 -complete=dir OpenDir :call OpenDir(<f-args>)
+command! -nargs=1 -complete=dir OpenDir :call OpenDir(<f-args>, 1)
 command! -nargs=1 -complete=custom,ProjectComplete Open :call Open(<f-args>)
 
 function! Open(project)
-  call OpenDir(g:project_dir . '/' . a:project)
+  call OpenDir(g:project_dir . '/' . a:project, 1)
 endfunction
 
-function! OpenDir(path)
+function! OpenDir(path, run_callback)
   execute 'lcd ' . a:path
   let t:directory = fnamemodify(a:path, ":t")
   let l:readme = get(split(system("ls README*"), "\n"), 0)
@@ -26,13 +26,13 @@ function! OpenDir(path)
     execute 'NERDTree ' . a:path
     execute 'normal l'
   endif
-  if exists('g:open_dir_callback')
+  if a:run_callback && exists('g:open_dir_callback')
     execute g:open_dir_callback
   endif
 endfunction
 
 function! OpenVimrc()
-  call OpenDir("~/.vim")
+  call OpenDir("~/.vim", 0)
   execute 'edit ~/.vimrc'
 endfunction
 
