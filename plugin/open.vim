@@ -10,7 +10,6 @@ command! -nargs=1 -complete=custom,ProjectComplete Open :call Open(<f-args>)
 
 function! Open(project)
   call OpenDir(g:project_dir . '/' . a:project)
-  execute 'normal l'
 endfunction
 
 function! OpenDir(path)
@@ -27,13 +26,12 @@ function! OpenDir(path)
     execute g:open_dir_callback
   else
     execute 'NERDTree ' . a:path
+    execute 'normal l'
   endif
 endfunction
 
 function! OpenVimrc()
   call OpenDir("~/.vim")
-  execute 'normal I'
-  execute 'normal l'
   execute 'edit ~/.vimrc'
 endfunction
 
