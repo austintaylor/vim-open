@@ -34,7 +34,7 @@ function! OpenVimrc()
   call OpenDir("~/.vim")
   execute 'normal I'
   execute 'normal l'
-  execute 'edit .vimrc'
+  execute 'edit ~/.vimrc'
 endfunction
 
 function! ProjectComplete(prefix, line, position)
