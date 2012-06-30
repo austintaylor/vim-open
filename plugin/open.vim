@@ -22,11 +22,12 @@ function! OpenDir(path)
     new
   endif
   silent only
-  if exists('g:open_dir_callback')
-    execute g:open_dir_callback
-  else
+  if exists('g:open_dir_auto_open_nerdtree') && g:open_dir_auto_open_nerdtree
     execute 'NERDTree ' . a:path
     execute 'normal l'
+  endif
+  if exists('g:open_dir_callback')
+    execute g:open_dir_callback
   endif
 endfunction
 
