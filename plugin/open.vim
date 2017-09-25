@@ -25,8 +25,6 @@ function! OpenDir(path)
   silent only
   if exists('g:open_dir_callback')
     execute g:open_dir_callback
-  else
-    execute 'NERDTree ' . a:path
   endif
 endfunction
 
